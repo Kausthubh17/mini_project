@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Finder</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <div class="container">
+        <h1>College Finder - Step 1</h1>
+        <form id="initialForm" action="step2.html">
+            <label for="courseType">Choose Course Level:</label>
+            <select id="courseType" name="courseType" required>
+                <option value="UG">Undergraduate (UG)</option>
+                <option value="PG">Postgraduate (PG)</option>
+            </select>
+
+            <label for="streamType">Choose Stream:</label>
+            <select id="streamType" name="streamType" required>
+                <option value="Engineering">Engineering</option>
+                <option value="Medical">Medical</option>
+            </select>
+
+            <button type="submit">Next</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('initialForm').addEventListener('submit', function (e) {
+            const courseType = document.getElementById('courseType').value;
+            const streamType = document.getElementById('streamType').value;
+
+            localStorage.setItem('courseType', courseType);
+            localStorage.setItem('streamType', streamType);
+        });
+    </script>
+</body>
+</html>
+
+

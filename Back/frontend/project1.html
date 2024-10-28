@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Counseling helper</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="react.js" defer></script>
+</head>
+<body>
+    <div class="navbar">
+        <a href="project1.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="container">
+        <h1>Submit Your Information</h1>
+        <form action="step2.html" method="get" target="_blank">
+            <label for="Level">Course Level:</label>
+            <select id="Level" name="Level" required>
+                <option value="" disabled selected>Select your Course</option>
+                <option value="UG">UG</option>
+                <option value="PG">PG</option>
+            </select>
+
+            <label for="Stream">Stream</label>
+            <select id="Stream" name="Stream" required>
+                <option value="" disabled selected>Select your Course</option>
+                <option value="Medical">Medical</option>
+                <option value="Engineering">Engineering</option>
+            </select>
+            
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+
+</html>

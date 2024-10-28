@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Finder - Step 2</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <div class="container">
+        <h1>College Finder - Step 2</h1>
+        <form id="examStatusForm" action="results.html">
+            <label for="examStatus">Have you completed the exam?</label>
+            <select id="examStatus" name="examStatus" required>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <div id="rankSection" style="display:none;">
+                <label for="rank">Enter Your Rank:</label>
+                <input type="number" id="rank" name="rank">
+            </div>
+
+            <div id="branchSelection" style="display:none;">
+                <label for="branch">Choose Branch:</label>
+                <select id="branch" name="branch">
+                    <option value="CSE">Computer Science Engineering</option>
+                    <option value="ECE">Electronics and Communication Engineering</option>
+                    <option value="ME">Mechanical Engineering</option>
+                    <option value="CE">Civil Engineering</option>
+                    <option value="MBBS">MBBS</option>
+                    <option value="BDS">Dentistry</option>
+                </select>
+            </div>
+
+            <button type="submit">Next</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('examStatus').addEventListener('change', function () {
+            const examStatus = this.value;
+            if (examStatus === 'yes') {
+                document.getElementById('rankSection').style.display = 'block';
+                document.getElementById('branchSelection').style.display = 'none';
+            } else {
+                document.getElementById('rankSection').style.display = 'none';
+                document.getElementById('branchSelection').style.display = 'block';
+            }
+        });
+
+        document.getElementById('examStatusForm').addEventListener('submit', function (e) {
+            const examStatus = document.getElementById('examStatus').value;
+            const rank = document.getElementById('rank').value;
+            const branch = document.getElementById('branch').value;
+
+            localStorage.setItem('examStatus', examStatus);
+            localStorage.setItem('rank', rank);
+            localStorage.setItem('branch', branch);
+        });
+    </script>
+</body>
+</html>

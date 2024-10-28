@@ -1,0 +1,118 @@
+       body {
+           font-family: Arial, sans-serif;
+           margin: 0;
+           padding: 0;
+       }
+
+       .navbar {
+           background-color: #333;
+           overflow: hidden;
+       }
+
+       .navbar a {
+           float: left;
+           display: block;
+           color: #f2f2f2;
+           text-align: center;
+           padding: 14px 20px;
+           text-decoration: none;
+       }
+
+       .navbar a:hover {
+           background-color: #ddd;
+           color: black;
+       }
+
+       .container {
+           padding: 20px;
+       }
+
+       form {
+           max-width: 600px;
+           margin: auto;
+           padding: 20px;
+           border: 1px solid #ddd;
+           border-radius: 5px;
+       }
+
+       form label {
+           display: block;
+           margin-bottom: 10px;
+       }
+
+       form input[type="text"],
+       form select {
+           width: 100%;
+           padding: 10px;
+           margin-bottom: 20px;
+           border: 1px solid #ccc;
+           border-radius: 4px;
+       }
+
+       form input[type="submit"] {
+           background-color: #4CAF50;
+           color: white;
+           border: none;
+           padding: 15px 20px;
+           text-align: center;
+           text-decoration: none;
+           display: inline-block;
+           font-size: 16px;
+           margin: 4px 2px;
+           cursor: pointer;
+           border-radius: 4px;
+       }
+
+       form input[type="submit"]:hover {
+           background-color: #45a049;
+       }
+
+       .about {
+           color: black;
+           background-color: rgb(118, 238, 198);
+       }
+
+       .para {
+           color: rgb(8, 152, 152);
+       }
+
+       /* Styling the college container */
+       .college-container {
+           display: flex;
+           flex-direction: column;
+           gap: 20px;
+           padding: 20px;
+           max-width: 800px;
+           margin: 20px auto;
+           background-color: #f9f9f9;
+           border-radius: 8px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+       }
+
+       /* Styling individual college cards */
+       .college-card {
+           background-color: #ffffff;
+           border-radius: 8px;
+           padding: 15px;
+           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+           transition: transform 0.2s;
+       }
+
+       .college-card:hover {
+           transform: scale(1.03);
+           /* Zoom effect on hover */
+       }
+
+       /* Styling the college name */
+       .college-name {
+           font-size: 1.5rem;
+           font-weight: bold;
+           margin-bottom: 10px;
+           color: #333;
+       }
+
+       /* Styling the rank info */
+       .college-rank {
+           font-size: 1.2rem;
+           color: #555;
+       }

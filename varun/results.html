@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Finder - Results</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <div class="container">
+        <h1>College Finder - Results</h1>
+        <div id="results"></div>
+    </div>
+    <script>
+        const courseType = localStorage.getItem('courseType');
+        const streamType = localStorage.getItem('streamType');
+        const examStatus = localStorage.getItem('examStatus');
+        const rank = localStorage.getItem('rank');
+        const branch = localStorage.getItem('branch');
+
+        let resultsHTML = `<h2>${courseType} - ${streamType}</h2>`;
+
+        if (examStatus === 'yes') {
+            resultsHTML += `<p>Your Rank: ${rank}</p>`;
+            resultsHTML += `<p>Colleges you are eligible for:</p>`;
+            // Mock data - Replace with actual logic
+            resultsHTML += `<ul><li>College 1</li><li>College 2</li></ul>`;
+        } else {
+            resultsHTML += `<p>Selected Branch: ${branch}</p>`;
+            resultsHTML += `<p>Estimated Rank to get into the branch:</p>`;
+            // Mock data - Replace with actual logic
+            resultsHTML += `<ul><li>College 1 - Rank 1000</li><li>College 2 - Rank 1500</li></ul>`;
+        }
+
+        document.getElementById('results').innerHTML = resultsHTML;
+    </script>
+</body>
+</html>
