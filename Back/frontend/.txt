@@ -569,3 +569,86 @@ WARANGAL INST OF TECHNOLOGY SCIENCE
 <option value="VIVEKANANDA INSTT OF TECH AND SCI  BOMMAKAL">VIVEKANANDA INSTT OF TECH AND SCI  BOMMAKAL</option>
 <option value="VMR PRADEEP KUMAR INST OF ENGG & TECH">VMR PRADEEP KUMAR INST OF ENGG & TECH</option>
 <option value="WARANGAL INST OF TECHNOLOGY SCIENCE">WARANGAL INST OF TECHNOLOGY SCIENCE</option>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        document.getElementById('examStatus').addEventListener('change', function () {
+            const examStatus = this.value;
+            document.getElementById('Yes').style.display = examStatus === 'yes' ? 'block' : 'none';
+            document.getElementById('No').style.display = examStatus === 'no' ? 'block' : 'none';
+        });
+
+        document.getElementById('examStatusForm').addEventListener('submit', async function (e) {
+            e.preventDefault(); // Prevent default form submission
+
+            const examStatus = document.getElementById('examStatus').value;
+            const outputDiv = document.getElementById('backend-output');
+            const outputMessage = document.getElementById('output-message');
+
+            outputDiv.style.display = 'none'; // Hide output initially
+
+            try {
+                let response, data;
+
+                if (examStatus === 'yes') {
+                    const rank = document.getElementById('rank').value;
+                    const category = document.getElementById('categoryRank').value;
+
+                    response = await fetch(`/colleges-by-rank?rank=${rank}&category=${category}`);
+                } else {
+                    const name = document.getElementById('collegeName').value;
+                    const branch = document.getElementById('branch').value;
+                    const category = document.getElementById('categoryBranch').value;
+
+                    response = await fetch(`/colleges-by-branch?name=${name}&branch=${branch}&category=${category}`);
+                }
+
+                if (!response.ok) throw new Error('Failed to fetch data');
+
+                data = await response.json();
+                displayOutputInForm(data, examStatus);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                outputMessage.textContent = 'Error fetching data from the server.';
+                outputDiv.style.display = 'block';
+            }
+        });
+
+        function displayOutputInForm(data, examStatus) {
+            const outputMessage = document.getElementById('output-message');
+            const outputDiv = document.getElementById('backend-output');
+
+            if (examStatus === 'yes') {
+                if (data.length === 0) {
+                    outputMessage.textContent = 'No colleges found for the given rank and category.';
+                } else {
+                    const collegesList = data.map(college => `${college.name} (Branch: ${college.branch || 'N/A'})`).join(', ');
+                    outputMessage.textContent = `Colleges: ${collegesList}`;
+                }
+            } else {
+                if (!data.categoryValue) {
+                    outputMessage.textContent = 'College not found or category data missing.';
+                } else {
+                    outputMessage.textContent = `Cutoff Rank for Category: ${data.categoryValue}`;
+                }
+            }
+
+            outputDiv.style.display = 'block'; // Show the output section
+        }
+    </script>
