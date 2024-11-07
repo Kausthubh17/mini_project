@@ -652,3 +652,147 @@ WARANGAL INST OF TECHNOLOGY SCIENCE
             outputDiv.style.display = 'block'; // Show the output section
         }
     </script>
+
+
+
+
+
+
+
+
+
+<option value="AERONAUTICAL ENGINEERING">AERONAUTICAL ENGINEERING</option>
+<option value="AGRICULTURAL ENGINEERING">AGRICULTURAL ENGINEERING</option>
+<option value="ARTIFICIAL INTELLIGENCE">ARTIFICIAL INTELLIGENCE</option>
+<option value="ARTIFICIAL INTELLIGENCE AND DATA SCIENCE">ARTIFICIAL INTELLIGENCE AND DATA SCIENCE</option>
+<option value="ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING">ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING</option>
+<option value="AUTOMOBILE ENGINEERING">AUTOMOBILE ENGINEERING</option>
+<option value="BIO-MEDICAL ENGINEERING">BIO-MEDICAL ENGINEERING</option>
+<option value="BIO-TECHNOLOGY">BIO-TECHNOLOGY</option>
+<option value="BTECH MECHANICAL WITH MTECH MANUFACTURING SYSTEMS">BTECH MECHANICAL WITH MTECH MANUFACTURING SYSTEMS</option>
+<option value="BTECH MECHANICAL WITH MTECH THERMAL ENGG">BTECH MECHANICAL WITH MTECH THERMAL ENGG</option>
+<option value="CHEMICAL ENGINEERING">CHEMICAL ENGINEERING</option>
+<option value="CIVIL ENGINEERING">CIVIL ENGINEERING</option>
+<option value="COMPUTER ENGINEERING">COMPUTER ENGINEERING</option>
+<option value="COMPUTER ENGINEERING (SOFTWARE ENGINEERING)">COMPUTER ENGINEERING (SOFTWARE ENGINEERING)</option>
+<option value="COMPUTER SCIENCE">COMPUTER SCIENCE</option>
+<option value="COMPUTER SCIENCE & DESIGN">COMPUTER SCIENCE & DESIGN</option>
+<option value="COMPUTER SCIENCE & ENGINEERING (NETWORKS)">COMPUTER SCIENCE & ENGINEERING (NETWORKS)</option>
+<option value="COMPUTER SCIENCE AND BUSINESS SYSTEM">COMPUTER SCIENCE AND BUSINESS SYSTEM</option>
+<option value="COMPUTER SCIENCE AND ENGG (ARTIFICIAL INTELLIGENCE)">COMPUTER SCIENCE AND ENGG (ARTIFICIAL INTELLIGENCE)</option>
+<option value="COMPUTER SCIENCE AND ENGINEERING">COMPUTER SCIENCE AND ENGINEERING</option>
+<option value="COMPUTER SCIENCE AND ENGINEERING (ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING)">COMPUTER SCIENCE AND ENGINEERING (ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING)</option>
+<option value="COMPUTER SCIENCE AND ENGINEERING (CYBER SECURITY)">COMPUTER SCIENCE AND ENGINEERING (CYBER SECURITY)</option>
+<option value="COMPUTER SCIENCE AND ENGINEERING (DATA SCIENCE)">COMPUTER SCIENCE AND ENGINEERING (DATA SCIENCE)</option>
+<option value="COMPUTER SCIENCE AND ENGINEERING (IOT)">COMPUTER SCIENCE AND ENGINEERING (IOT)</option>
+<option value="COMPUTER SCIENCE AND INFORMATION TECHNOLOGY">COMPUTER SCIENCE AND INFORMATION TECHNOLOGY</option>
+<option value="CSE (IoT AND CYBER SECURITY INCLUDING BLOCK CHAIN TECHNOLOGY)">CSE (IoT AND CYBER SECURITY INCLUDING BLOCK CHAIN TECHNOLOGY)</option>
+<option value="DAIRYING">DAIRYING</option>
+<option value="DIGITAL TECHNIQUES FOR DESIGN AND PLANNING">DIGITAL TECHNIQUES FOR DESIGN AND PLANNING</option>
+<option value="ELECTRICAL AND ELECTRONICS ENGINEERING">ELECTRICAL AND ELECTRONICS ENGINEERING</option>
+<option value="ELECTRONICS AND COMMUNICATION ENGINEERING">ELECTRONICS AND COMMUNICATION ENGINEERING</option>
+<option value="ELECTRONICS AND COMPUTER ENGINEERING">ELECTRONICS AND COMPUTER ENGINEERING</option>
+<option value="ELECTRONICS AND INSTRUMENTATION ENGINEERING">ELECTRONICS AND INSTRUMENTATION ENGINEERING</option>
+<option value="ELECTRONICS AND TELEMATICS">ELECTRONICS AND TELEMATICS</option>
+<option value="ELECTRONICS COMMUNICATION AND INSTRUMENTATION ENGINEERING">ELECTRONICS COMMUNICATION AND INSTRUMENTATION ENGINEERING</option>
+<option value="FOOD TECHNOLOGY">FOOD TECHNOLOGY</option>
+<option value="GEO INFORMATICS">GEO INFORMATICS</option>
+<option value="INFORMATION TECHNOLOGY">INFORMATION TECHNOLOGY</option>
+<option value="MECHANICAL (MECHATRONICS) ENGINEERING">MECHANICAL (MECHATRONICS) ENGINEERING</option>
+<option value="MECHANICAL ENGINEERING">MECHANICAL ENGINEERING</option>
+<option value="METALLURGICAL ENGINEERING">METALLURGICAL ENGINEERING</option>
+<option value="METALLURGY AND MATERIAL ENGINEERING">METALLURGY AND MATERIAL ENGINEERING</option>
+<option value="MINING ENGINEERING">MINING ENGINEERING</option>
+<option value="PHARMACEUTICAL ENGINEERING">PHARMACEUTICAL ENGINEERING</option>
+<option value="TEXTILE ENGINEERING">TEXTILE ENGINEERING</option>
+<option value="TEXTILE TECHNOLOGY">TEXTILE TECHNOLOGY</option>
+<option value="TEXTILE TECHNOLOGY / TEXTILE ENGINEERING">TEXTILE TECHNOLOGY / TEXTILE ENGINEERING</option>
+
+
+
+
+
+
+
+
+
+
+
+
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const path = require('path');
+const College = require('./college.js');
+
+const app = express();
+const PORT = process.env.PORT || 5001;
+
+app.use(cors());
+app.use(express.json());
+app.use(express.static('frontend'));
+
+mongoose.connect('mongodb://localhost:27017/college-rankings', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => {
+    console.log("Connected to MongoDB");
+}).catch(err => {
+    console.error("MongoDB connection error:", err);
+});
+
+// Start server
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/frontend/project1.html'); // Adjust the path as needed
+  });
+
+// Serve step2.html for the step2 route
+app.get('/step2.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'step2.html')); // Use path module for better path handling
+});
+
+// Fetch colleges based on rank, course level, stream, and category
+app.get('/colleges-by-rank', async (req, res) => {
+    const { rank, category } = req.query;
+
+    try {
+        const query = {};
+        if (rank) query[category] = { $gte: rank }; // Ensure rank in DB is <= given rank
+        const colleges = await College.find(query);
+        res.json(colleges);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error });
+    }
+});
+
+// Fetch colleges based on branch, course level, stream, and category
+app.get('/colleges-by-branch', async (req, res) => {
+    const { name, branch, category } = req.query;
+
+    try {
+        const college = await College.findOne({ 
+            name, 
+            branch 
+        }, { [category]: 1, _id: 0 }); // Fetch only the specified category field
+
+        if (college) {
+            res.json({ categoryValue: college[category] });
+        } else {
+            res.status(404).json({ message: 'College not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error });
+    }
+});
+
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
+// Proxy requests for contact form submissions to the friend's server on port 3000
+app.use('/submit-contact-form', createProxyMiddleware({
+    target: 'http://localhost:3000',
+    changeOrigin: true,
+}));

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NxtSelf - Home</title>
+    <link rel="stylesheet" href="home_styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">NxtSelf</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section with Slideshow -->
+    <header class="hero">
+        <div class="slideshow-container">
+            <div class="slide fade">
+                <img src="college1.jpg" alt="College Campus 1">
+                <div class="text">Welcome to NxtSelf</div>
+            </div>
+            <div class="slide fade">
+                <img src="college2.jpg" alt="College Campus 2">
+                <div class="text">Find Your Dream College</div>
+            </div>
+            <div class="slide fade">
+                <img src="college3.webp" alt="College Campus 3">
+                <div class="text">Plan Your Future with Data</div>
+            </div>
+        </div>
+        <div class="center-button">
+            <a href="project1.html" class="btn-main">Explore College Predictions</a>
+        </div>
+    </header>
+
+    <!-- Updates Section -->
+    <section class="updates">
+        <h2>Important Updates</h2>
+        <div class="updates-container">
+            <div class="scrolling-text">
+                <p>Update 1: TS EAMCET Results are out! Check your eligibility now.</p>
+                <p>Update 2: Application deadlines for top colleges approaching!</p>
+                <p>Update 3: NEET Predictions for medical colleges - Coming Soon!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Notice for NEET Prediction -->
+    <section class="coming-soon">
+        <img src="medical.webp" alt="Medical College">
+        <div class="overlay">
+            <h3>NEET Prediction Coming Soon!</h3>
+            <p>Stay tuned for our upcoming feature to predict NEET-based college admissions!</p>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="info">
+        <h2>Your Guide to College Admissions</h2>
+        <p>College Predictor is a one-stop solution for counseling help</p>
+        <br>
+        <div class="next-step">
+            <a href="learn_us.html" class="btn-next">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 NxtSelf. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Slideshow -->
+    <script>
+        let slideIndex = 0;
+        function showSlides() {
+            let slides = document.querySelectorAll(".slide");
+            slides.forEach((slide, index) => {
+                slide.style.display = index === slideIndex ? "block" : "none";
+            });
+            slideIndex = (slideIndex + 1) % slides.length;
+            setTimeout(showSlides, 3000); // Change image every 3 seconds
+        }
+        showSlides();
+    </script>
+</body>
+</html>

@@ -10,14 +10,17 @@
 </head>
 
 <body>
-    <div class="navbar">
-        <a href="project1.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-    </div>
+    <nav class="navbar">
+        <div class="logo">NxtSelf</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
 
     <div>
-        <h1>Enter your details</h1>
+        <h1>Enter your details</h1> 
         <form id="examStatusForm">
             <label for="examStatus">Have you completed the exam?</label>
             <select id="examStatus" required>
@@ -28,7 +31,7 @@
 
             <div id="Yes" style="display: none;">
                 <label for="rank">Enter your rank:</label>
-                <input type="number" id="rank" name="rank">
+                <input type="number" id="rank" name="rank" min="1" max="156865">
 
                 <label for="categoryRank">Category:</label>
                 <select id="categoryRank" required>
@@ -403,7 +406,6 @@
 
                 <label for="categoryBranch">Category:</label>
                 <select id="categoryBranch" required>
-                    <option value="" disabled selected>Select a category</option>
                     <option value="" disabled selected>Select a category</option>
                     <option value="ocB">Oc-boys</option>
                     <option value="ocG">Oc-girls</option>

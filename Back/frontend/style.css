@@ -2,27 +2,79 @@
            font-family: Arial, sans-serif;
            margin: 0;
            padding: 0;
+           background-color: #fff7ee;
+           font-weight: bold;
+           font-size: 20px;
        }
 
        .navbar {
-           background-color: #333;
-           overflow: hidden;
-       }
-
-       .navbar a {
-           float: left;
-           display: block;
-           color: #f2f2f2;
-           text-align: center;
-           padding: 14px 20px;
-           text-decoration: none;
-       }
-
-       .navbar a:hover {
-           background-color: #ddd;
-           color: black;
-       }
-
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem ;
+        background-color: #3E4E8F; /* Deep Indigo */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 10;
+    }
+    
+    .navbar .logo {
+        color: #F0F0F0; /* Soft White */
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+    
+    .nav-links {
+        list-style: none;
+        display: flex;
+    }
+    
+    .nav-links li {
+        margin-left: 2rem;
+    }
+    
+    .nav-links a {
+        color: #F0F0F0; /* Soft White */
+        text-decoration: none;
+        font-size: 1.1rem;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-links a:hover {
+        background-color: #5A6BBF; /* Lighter Indigo */
+        color: #FF6F61; /* Vibrant Orange */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        transform: scale(1.05);
+    }
+    
+    /* Responsive Navbar */
+    @media (max-width: 768px) {
+        .nav-links {
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background-color: #3E4E8F;
+            width: 100%;
+            display: none;
+        }
+        .nav-links li {
+            margin: 1rem 0;
+        }
+        .navbar.active .nav-links {
+            display: flex;
+        }
+    }
+    
        .container {
            padding: 20px;
        }
@@ -31,7 +83,7 @@
            max-width: 600px;
            margin: auto;
            padding: 20px;
-           border: 1px solid #ddd;
+           border: 2px solid #191919;
            border-radius: 5px;
        }
 
@@ -45,7 +97,7 @@
            width: 100%;
            padding: 10px;
            margin-bottom: 20px;
-           border: 1px solid #ccc;
+           border: 2px solid #191919;
            border-radius: 4px;
        }
 
@@ -64,7 +116,7 @@
        }
 
        form input[type="submit"]:hover {
-           background-color: #45a049;
+           background-color: #28872d;
        }
 
        .about {
@@ -127,6 +179,7 @@
     /* Table header styling */
     th {
         background-color: #4CAF50; /* Green background */
+        border: 1px solid #28872d;
         color: white; /* White text */
         padding: 12px; /* Padding for cells */
         text-align: left; /* Align text to the left */
@@ -134,7 +187,7 @@
 
     /* Table cell styling */
     td {
-        border: 1px solid #ddd; /* Light gray border */
+        border: 1px solid #8f4c4c; /* Light gray border */
         padding: 8px; /* Padding for cells */
     }
 
@@ -158,3 +211,40 @@
             text-align: left; /* Align header text to the left */
         }
     }
+
+    .carousel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        max-width: 100%; /* Set a max-width if needed */
+        margin: auto;
+        overflow: hidden;
+        border: 2px solid #9d3d3d;
+    }
+    
+    .carousel-image {
+        display: none;
+        width: 100%; /* Ensures the images take the full width of the carousel container */
+        height: 350px;
+    }
+    
+    .carousel-image.active {
+        display: block;
+    }
+    
+    .carousel-controls {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    
+    /* Center the entire carousel on the page */
+    .carousel-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Full viewport height for vertical centering */
+    }
+    

@@ -3,21 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <title>About Us - NxtSelf</title>
+    <link rel="stylesheet" href="aboutus_style.css">
+    <link rel="stylesheet" href="aos.css">
+    <!--nstall this in terminal  npm install aos --save --> 
+
 </head>
 <body>
-    <div class="navbar">
-        <a href="project1.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-    </div>
+    <nav class="navbar">
+        <div class="logo">NxtSelf</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+    <header class="header">
+        <div class="header-overlay">
+            <h1>About Us</h1>
+            <p>Your Guide to College Success</p>
+        </div>
+    </header>
+
+    <section class="about">
+        <div class="container">
+            <div class="info-box" data-aos="fade-up">
+                <h2>Who We Are</h2>
+                <p>Welcome to <strong>NxtSelf</strong> – your dedicated guide to navigating college admissions with confidence and clarity. Our platform is a data-driven college predictor, designed to help students explore potential college options based on their exam results, category, and preferences.</p>
+            </div>
+            <div class="info-box" data-aos="fade-up" data-aos-delay="100">
+                <h2>Our Mission</h2>
+                <p>Our mission is to empower students to make informed choices about their college future, helping them find their path to success.</p>
+            </div>
+            <div class="info-box" data-aos="fade-up" data-aos-delay="200">
+                <h2>Our Vision</h2>
+                <p>Our vision is to be the leading platform in college admissions guidance, making the selection process transparent and accessible for every student.</p>
+            </div>
+            <div class="info-box" data-aos="fade-up" data-aos-delay="300">
+                <h2>Our Values</h2>
+                <ul>
+                    <li>Transparency</li>
+                    <li>Empowerment</li>
+                    <li>Innovation</li>
+                    <li>Excellence</li>
+                </ul>
+            </div>
+            <div class="info-box" data-aos="fade-up" data-aos-delay="400">
+                <h2>Social Proof</h2>
+                <blockquote>“I was so confused about my options, but NxtSelf made it easy to see which colleges I could aim for based on my rank.”</blockquote>
+                <blockquote>“This tool gave me the exact rank I needed to target for my dream college. It’s a must-use for anyone planning for admissions.”</blockquote>
+            </div>
+            <div class="info-box contact" data-aos="fade-up" data-aos-delay="500">
+                <h2>Contact Us</h2>
+                <p><i class="fas fa-envelope"></i> Email: kunchalamohankumar@gmail.com</p>
+                <p><i class="fas fa-phone"></i> Phone:93900136040</p>
+                <p><i class="fab fa-facebook"></i> Facebook | <i class="fab fa-twitter"></i> Twitter | <i class="fab fa-linkedin"></i> LinkedIn</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 NxtSelf. All rights reserved.</p>
+    </footer>
+
+    <script src="aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
     
-    <div class="container">
-        <span><h1 class="about">About us</h1></span>
-        <p class="para">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque, voluptas explicabo beatae quia ad veniam at excepturi perferendis quibusdam recusandae, quae repellendus libero quidem modi tempora, quos quod dolor expedita.
-        </p>
-    </div>
+
 </body>
 </html>

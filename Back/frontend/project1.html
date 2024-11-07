@@ -6,17 +6,28 @@
     <title>Student Counseling helper</title>
     <link rel="stylesheet" href="style.css">
     <script src="react.js" defer></script>
+    <script src="initial.js" defer></script>
 </head>
 <body>
-    <div class="navbar">
-        <a href="project1.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-    </div>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">NxtSelf</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
 
+    <div class="carousel">
+            <img  src="image1.jpg" alt="Image 1" class="carousel-image active">
+            <img src="image2.jpg" alt="Image 2" class="carousel-image">
+            <img src="image3.jpg" alt="Image 3" class="carousel-image">
+            <!-- Add more images as needed -->
+    </div>
     <div class="container">
-        <h1>Submit Your Information</h1>
         <form action="step2.html" method="get" target="_blank">
+            <h1>Submit Your Information</h1>
             <label for="Level">Course Level:</label>
             <select id="Level" name="Level" required>
                 <option value="" disabled selected>Select your Course</option>
@@ -35,5 +46,26 @@
         </form>
     </div>
 </body>
+
+<script>
+        const images = document.querySelectorAll('.carousel-image');
+    let currentIndex = 0;
+
+    function showNextImage() {
+        images[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % images.length;
+        images[currentIndex].classList.add('active');
+    }
+
+    setInterval(showNextImage, 3000); // Change image every 3 seconds (adjust as needed)
+    document.getElementById('prevBtn').addEventListener('click', function() {
+        images[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        images[currentIndex].classList.add('active');
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', showNextImage);
+
+</script>
 
 </html>

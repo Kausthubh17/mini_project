@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 const College = require('./college.js');
 
 const app = express();
@@ -9,6 +10,7 @@ const PORT = process.env.PORT || 5001;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // To handle form data
 app.use(express.static('frontend'));
 
 mongoose.connect('mongodb://localhost:27017/college-rankings', {
@@ -26,8 +28,8 @@ app.listen(PORT, () => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/frontend/project1.html'); // Adjust the path as needed
-  });
+    res.sendFile(__dirname + '/frontend/home.html'); // Adjust the path as needed
+});
 
 // Serve step2.html for the step2 route
 app.get('/step2.html', (req, res) => {
@@ -66,4 +68,37 @@ app.get('/colleges-by-branch', async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Server error', error });
     }
+});
+
+// Contact Form Submission - Save data to message.json
+app.post('/submit-contact-form', (req, res) => {
+    const { name, email, subject, message } = req.body;
+    const newMessage = {
+        name,
+        email,
+        subject,
+        message,
+        date: new Date()
+    };
+
+    // Read the existing messages
+    fs.readFile('message.json', 'utf8', (err, data) => {
+        let messages = [];
+        if (!err && data) {
+            messages = JSON.parse(data);
+        }
+        
+        // Add the new message to the array
+        messages.push(newMessage);
+
+        // Write the updated messages array back to message.json
+        fs.writeFile('message.json', JSON.stringify(messages, null, 2), (err) => {
+            if (err) {
+                console.error("Failed to save message:", err);
+                res.status(500).json({ message: 'Failed to save message', error: err });
+            } else {
+                res.status(200).json({ message: 'Message received successfully' });
+            }
+        });
+    });
 });
